@@ -12,16 +12,17 @@ int main() {
 
     //Часть 1 LFSR и SG-генератор
     int deg7 = 7;
-    vector<pair<int, string>> poly7 = {
-        {15, "x^7 + x^3 + x^2 + x + 1"},
-        {3,  "x^7 + x + 1"},
-        {9,  "x^7 + x^3 + 1"}
+    const int polyMasks[] = {15, 3, 9};
+    const char* polyNames[] = {
+        "x^7 + x^3 + x^2 + x + 1",
+        "x^7 + x + 1",
+        "x^7 + x^3 + 1"
     };
 
     cout << "1. Primitiveness check of degree-7 polynomials:\n";
-    for (auto& p : poly7) {
-        bool prim = isPrimitive(deg7, p.first);
-        cout << "   " << p.second << " -> "
+    for (int i = 0; i < 3; ++i) {
+        bool prim = isPrimitive(deg7, polyMasks[i]);
+        cout << "   " << polyNames[i] << " -> "
                   << (prim ? "primitive" : "NOT primitive") << endl;
     }
 
@@ -33,8 +34,8 @@ int main() {
         cerr << "Warning: chosen G2 polynomial is not primitive!" << endl;
     }
 
-    int init1 = 0b1010101;
-    int init2 = 0b11001;
+    int init1 = 85;
+    int init2 = 25;
     SGGenerator sg(deg7, maskG1, deg2, maskG2, init1, init2);
 
     const int SAMPLE_BITS = 10000;

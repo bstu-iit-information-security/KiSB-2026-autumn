@@ -36,19 +36,21 @@ bool isPrimeLehmann(int n, int k) {
     return true;
 }
 
-bool trialDivision(int n, const vector<int>& primes) {
-    for (int p : primes) {
+bool trialDivision(int n, const int primes[], int primeCount) {
+    for (int i = 0; i < primeCount; ++i) {
+        int p = primes[i];
         if (p * p > n) break;
         if (n % p == 0) return false;
     }
     return true;
 }
 
-const vector<int> SMALL_PRIMES = {
+const int SMALL_PRIMES[] = {
     2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,
     101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,
     193,197,199,211,223,227,229,233,239,241,251
 };
+const int SMALL_PRIMES_COUNT = sizeof(SMALL_PRIMES) / sizeof(SMALL_PRIMES[0]);
 
 int generatePrime(int bits, SGGenerator& sg, int lehmannIterations,
                        int& candidatesTested) {
@@ -59,7 +61,7 @@ int generatePrime(int bits, SGGenerator& sg, int lehmannIterations,
         n |= (1ULL << (bits - 1));
         candidatesTested++;
 
-        if (!trialDivision(n, SMALL_PRIMES)) {
+        if (!trialDivision(n, SMALL_PRIMES, SMALL_PRIMES_COUNT)) {
             continue;
         }
 
