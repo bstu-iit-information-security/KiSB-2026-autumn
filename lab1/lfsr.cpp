@@ -18,11 +18,6 @@ int LFSR::nextBit() {
 
 int LFSR::getState() const { return state; }
 
-void LFSR::setState(int s) {
-    state = s;
-    if (state == 0) state = 1;
-}
-
 bool isPrimitive(int degree, int polyMask) {
     LFSR lfsr(degree, polyMask, 1);
     int initState = 1;

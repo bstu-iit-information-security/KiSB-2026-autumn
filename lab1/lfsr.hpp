@@ -16,7 +16,6 @@ public:
     int nextBit();
 
     int getState() const;
-    void setState(int s);
 };
 
 
