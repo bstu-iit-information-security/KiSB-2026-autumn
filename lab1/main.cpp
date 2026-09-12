@@ -10,8 +10,8 @@ using namespace std;
 int main() {
     cout << "Lab work #1, Variant 2\n\n";
 
-    //Часть 1 LFSR и SG-генератор
-    int deg7 = 7;
+    // LFSR и SG-генератор
+    const int g1Degree = 7;
     const int polyMasks[] = {15, 3, 9};
     const char* polyNames[] = {
         "x^7 + x^3 + x^2 + x + 1",
@@ -21,46 +21,63 @@ int main() {
 
     cout << "1. Primitiveness check of degree-7 polynomials:\n";
     for (int i = 0; i < 3; ++i) {
-        bool prim = isPrimitive(deg7, polyMasks[i]);
+        const bool primitive = isPrimitive(g1Degree, polyMasks[i]);
+        LFSR lfsr(g1Degree, polyMasks[i], 1);
         cout << "   " << polyNames[i] << " -> "
-                  << (prim ? "primitive" : "NOT primitive") << endl;
+             << (primitive ? "primitive" : "NOT primitive")
+             << ", period = " << lfsr.getPeriod() << endl;
     }
 
-    // полином для G1 (x^7 + x + 1) и G2 (x^5 + x^2 + 1)
-    int maskG1 = 3;
-    int deg2 = 5;
-    int maskG2 = 5;
-    if (!isPrimitive(deg2, maskG2)) {
+    // Для SG G1 = x^7 + x + 1 и G2 = x^5 + x^2 + 1.
+    const int g1Mask = polyMasks[1];
+    const int g2Degree = 5;
+    const int g2Mask = 5;
+    if (!isPrimitive(g2Degree, g2Mask)) {
         cerr << "Warning: chosen G2 polynomial is not primitive!" << endl;
     }
 
-    int init1 = 85;
-    int init2 = 25;
-    SGGenerator sg(deg7, maskG1, deg2, maskG2, init1, init2);
+    const int g1InitialState = 85;
+    const int g2InitialState = 25;
 
-    const int SAMPLE_BITS = 10000;
-    int ones = 0;
-    for (int i = 0; i < SAMPLE_BITS; ++i) {
-        if (sg.nextBit() == 1) ones++;
+    const int sampleBits = 10000;
+    cout << "\n2. SG-generator statistics for different G1 polynomials:\n";
+    cout << "   polynomial                          zeros  ones  ones frequency\n";
+    for (int i = 0; i < 3; ++i) {
+        SGGenerator testGenerator(
+            g1Degree, polyMasks[i], g2Degree, g2Mask,
+            g1InitialState, g2InitialState);
+        int ones = 0;
+        for (int bit = 0; bit < sampleBits; ++bit) {
+            if (testGenerator.nextBit() == 1) {
+                ++ones;
+            }
+        }
+           const double onesFrequency = static_cast<double>(ones) / sampleBits;
+           cout << "   " << polyNames[i] << "  "
+               << (sampleBits - ones) << "  " << ones << "  "
+               << onesFrequency << endl;
     }
-    double freq = static_cast<double>(ones) / SAMPLE_BITS;
-    cout << "\n2. SG-generator statistics (after " << SAMPLE_BITS << " bits):\n";
-    cout << "   ones = " << ones << ", frequency = " << freq
-              << " (expected ~0.5)\n";
+
+    SGGenerator sg(g1Degree, g1Mask, g2Degree, g2Mask,
+                   g1InitialState, g2InitialState);
 
     // Часть 2: генерация простого числа с тестом Леманна
     cout << "\n3. Generating a 16-bit prime using Lehmann test (5 iterations):\n";
     int bits = 16;
     int lehmannIter = 5;
     int candidates = 0;
+    int filteredCandidates = 0;
 
     auto start = chrono::high_resolution_clock::now();
-    int prime = generatePrime(bits, sg, lehmannIter, candidates);
+    int prime = generatePrime(bits, sg, lehmannIter, candidates,
+                              filteredCandidates);
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> elapsed = end - start;
 
     cout << "   Found prime: " << prime << endl;
     cout << "   Candidates tested before success: " << candidates << endl;
+        cout << "   Candidates rejected by small-prime filtering: "
+            << filteredCandidates << endl;
     cout << "   Time elapsed: " << elapsed.count() << " seconds\n";
 
     //проверка

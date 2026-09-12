@@ -1,21 +1,18 @@
 #ifndef PRIME_UTILS_HPP
 #define PRIME_UTILS_HPP
 
-#include <cstdint>
 #include "sg_generator.hpp"
 
-// Модульное возведение в степень (a^e mod m)
-int mod_pow(int a, int e, int m);
+// a^e mod m
+int mod_pow(int base, int exponent, int modulus);
 
-// Тест Леманна (вероятностный)
-bool isPrimeLehmann(int n, int k);
+// Леманна
+bool isPrimeLehmann(int number, int iterations, SGGenerator& generator);
 
+bool trialDivision(int number, const int primes[], int primeCount);
 
-bool trialDivision(int n, const int primes[], int primeCount);
-
-
-int generatePrime(int bits, SGGenerator& sg, int lehmannIterations,
-                       int& candidatesTested);
+int generatePrime(int bitCount, SGGenerator& generator, int lehmannIterations,
+                  int& candidatesTested, int& filteredCandidates);
 
 // для предварительной фильтрации
 extern const int SMALL_PRIMES[];

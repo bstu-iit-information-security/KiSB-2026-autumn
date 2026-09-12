@@ -3,19 +3,21 @@
 
 #include <cstdint>
 
-// Линейный регистр сдвига с обратной связью (LFSR)
 class LFSR {
 private:
-    int state;   // текущее состояние (биты регистра)
-    int mask;    // битовая маска коэффициентов (x^0..x^(n-1))
-    int n;            // степень полинома (длина регистра)
+    int state; // текущее состояние регистра
+    int mask;  // коэффициенты полинома для обратной связи
+    int n;     // длина регистра
 
 public:
     LFSR(int degree, int polyMask, int initState);
 
+    
     int nextBit();
 
     int getState() const;
+
+    int getPeriod() const;
 };
 
 
