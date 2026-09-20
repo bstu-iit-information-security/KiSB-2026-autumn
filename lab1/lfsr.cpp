@@ -19,6 +19,7 @@ LFSR::LFSR(int degree, int polyMask, int initState)
 }
 
 int LFSR::nextBit() {
+    const int outputBit = state & 1;
     int feedback = 0;
     for (int i = 0; i < n; ++i) {
         if ((mask & (1u << i)) != 0) {
@@ -26,7 +27,7 @@ int LFSR::nextBit() {
         }
     }
     state = (state >> 1) | (feedback << (n - 1));
-    return state & 1;
+    return outputBit;
 }
 
 int LFSR::getState() const { return state; }

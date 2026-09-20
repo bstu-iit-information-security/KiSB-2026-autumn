@@ -61,7 +61,7 @@ int main() {
     SGGenerator sg(g1Degree, g1Mask, g2Degree, g2Mask,
                    g1InitialState, g2InitialState);
 
-    // Часть 2: генерация простого числа с тестом Леманна
+
     cout << "\n3. Generating a 16-bit prime using Lehmann test (5 iterations):\n";
     int bits = 16;
     int lehmannIter = 5;
@@ -82,13 +82,7 @@ int main() {
 
     //проверка
     cout << "\n   Additional deterministic check (trial division up to sqrt):\n";
-    bool definitelyPrime = true;
-    for (int d = 2; d * d <= prime; ++d) {
-        if (prime % d == 0) {
-            definitelyPrime = false;
-            break;
-        }
-    }
+    const bool definitelyPrime = isPrimeDeterministic(prime);
     cout << "   " << (definitelyPrime ? "The number is indeed prime."
                                            : "Error: composite!") << endl;
 

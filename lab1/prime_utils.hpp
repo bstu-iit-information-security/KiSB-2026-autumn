@@ -11,6 +11,8 @@ bool isPrimeLehmann(int number, int iterations, SGGenerator& generator);
 
 bool trialDivision(int number, const int primes[], int primeCount);
 
+bool isPrimeDeterministic(int number);
+
 int generatePrime(int bitCount, SGGenerator& generator, int lehmannIterations,
                   int& candidatesTested, int& filteredCandidates);
 
