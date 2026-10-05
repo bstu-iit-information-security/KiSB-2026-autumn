@@ -1,0 +1,17 @@
+test_files (test_lab.CliTests.test_files) ... ok
+test_hamming_cli (test_lab.CliTests.test_hamming_cli) ... ok
+test_invalid_cli (test_lab.CliTests.test_invalid_cli) ... ok
+test_iterative_cli (test_lab.CliTests.test_iterative_cli) ... ok
+test_exhaustive_minimum_distance (test_lab.CodeTests.test_exhaustive_minimum_distance) ... ok
+test_experiments (test_lab.CodeTests.test_experiments) ... ok
+test_hamming_errors (test_lab.CodeTests.test_hamming_errors) ... ok
+test_injection_and_rng (test_lab.CodeTests.test_injection_and_rng) ... ok
+test_iterative_errors (test_lab.CodeTests.test_iterative_errors) ... ok
+test_large_blocks (test_lab.CodeTests.test_large_blocks) ... ok
+test_rectangle_and_ambiguity (test_lab.CodeTests.test_rectangle_and_ambiguity) ... ok
+test_validation (test_lab.CodeTests.test_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 2.715s
+
+OK
