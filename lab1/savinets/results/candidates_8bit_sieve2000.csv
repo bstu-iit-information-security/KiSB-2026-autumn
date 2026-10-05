@@ -1,0 +1,5 @@
+index,candidate,status,divisor,r,polynomial_checks,candidate_ms,elapsed_ms
+1,143,sieve_rejected,11,0,0,0.001292,0.004750
+2,145,sieve_rejected,5,0,0,0.000750,0.006875
+3,147,sieve_rejected,3,0,0,0.000541,0.008375
+4,149,prime,0,71,72,12.825000,12.836583

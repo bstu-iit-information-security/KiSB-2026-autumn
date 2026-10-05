@@ -1,0 +1,25 @@
+test_commands (test_lab.CliTests.test_commands) ... ok
+test_errors (test_lab.CliTests.test_errors) ... ok
+test_all_bit_lengths_and_seeds (test_lab.GenerationTests.test_all_bit_lengths_and_seeds) ... ok
+test_candidate_log (test_lab.GenerationTests.test_candidate_log) ... ok
+test_invalid_generation (test_lab.GenerationTests.test_invalid_generation) ... ok
+test_sieve_preserves_prime (test_lab.GenerationTests.test_sieve_preserves_prime) ... ok
+test_wrap_and_limit (test_lab.GenerationTests.test_wrap_and_limit) ... ok
+test_all_cycles_independent_floyd (test_lab.GeneratorTests.test_all_cycles_independent_floyd) ... ok
+test_invalid_inputs (test_lab.GeneratorTests.test_invalid_inputs) ... ok
+test_known_sequences (test_lab.GeneratorTests.test_known_sequences) ... ok
+test_statistics (test_lab.GeneratorTests.test_statistics) ... ok
+test_invalid_polynomials (test_lab.PolynomialTests.test_invalid_polynomials) ... ok
+test_largest_ring_no_carry (test_lab.PolynomialTests.test_largest_ring_no_carry) ... ok
+test_packed_against_naive (test_lab.PolynomialTests.test_packed_against_naive) ... ok
+test_polynomial_vs_binomial (test_lab.PolynomialTests.test_polynomial_vs_binomial) ... ok
+test_aks_against_independent_sieve (test_lab.PrimalityTests.test_aks_against_independent_sieve) ... ok
+test_capacity_and_invalid_numbers (test_lab.PrimalityTests.test_capacity_and_invalid_numbers) ... ok
+test_perfect_powers (test_lab.PrimalityTests.test_perfect_powers) ... ok
+test_polynomial_witness_and_primes (test_lab.PrimalityTests.test_polynomial_witness_and_primes) ... ok
+test_pseudoprimes_and_boundary (test_lab.PrimalityTests.test_pseudoprimes_and_boundary) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 1.210s
+
+OK
