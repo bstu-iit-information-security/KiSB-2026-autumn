@@ -1,0 +1,9 @@
+{
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "successful": true,
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "timestamp_utc": "2026-10-05T06:36:40.856130+00:00"
+}
