@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+archive/
+build/
+*.dSYM/
+*.docx
+REPORT.html
+results/latest_run/
