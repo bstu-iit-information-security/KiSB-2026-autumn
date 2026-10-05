@@ -2,11 +2,13 @@ import csv
 import io
 import math
 import random
+import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
-from lab.core import (Parameters, Generator, cycle, statistics, perfect_power, multiply,
+from lab1 import (Parameters, Generator, cycle, statistics, perfect_power, multiply,
                       polynomial_congruence, aks, candidate, generate, trial_prime, MAX_R)
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -196,6 +198,25 @@ class CliTests(unittest.TestCase):
         self.assertEqual(self.run_cli('sequence','12').stdout.split(),list('123456789012'))
         self.assertIn('verdict=prime',self.run_cli('check','97').stdout)
         self.assertEqual(self.run_cli('generate','8','0','256','1').returncode,5)
+
+    def test_standalone_without_arguments(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            script = target / 'lab1.py'
+            shutil.copy2(ROOT / 'lab1.py', script)
+            other_cwd = target / 'other'
+            other_cwd.mkdir()
+            result = subprocess.run([sys.executable, str(script)], cwd=other_cwd,
+                                    capture_output=True, text=True, timeout=45)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn('Лабораторная выполнена.', result.stdout)
+            self.assertIn('n=997 verdict=prime', result.stdout)
+            self.assertIn('n=1001 verdict=composite', result.stdout)
+            output = target / 'results/latest_run'
+            self.assertTrue((output / 'prime_generation.csv').is_file())
+            with (output / 'period_search.csv').open() as stream:
+                self.assertEqual(len(list(csv.DictReader(stream))), 9000)
+            self.assertFalse((other_cwd / 'results').exists())
 
 
 if __name__=='__main__':

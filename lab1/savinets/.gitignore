@@ -7,3 +7,4 @@ build/
 *.dSYM/
 *.docx
 REPORT.html
+results/latest_run/

@@ -1,5 +1,6 @@
 test_commands (test_lab.CliTests.test_commands) ... ok
 test_errors (test_lab.CliTests.test_errors) ... ok
+test_standalone_without_arguments (test_lab.CliTests.test_standalone_without_arguments) ... ok
 test_all_bit_lengths_and_seeds (test_lab.GenerationTests.test_all_bit_lengths_and_seeds) ... ok
 test_candidate_log (test_lab.GenerationTests.test_candidate_log) ... ok
 test_invalid_generation (test_lab.GenerationTests.test_invalid_generation) ... ok
@@ -20,6 +21,6 @@ test_polynomial_witness_and_primes (test_lab.PrimalityTests.test_polynomial_witn
 test_pseudoprimes_and_boundary (test_lab.PrimalityTests.test_pseudoprimes_and_boundary) ... ok
 
 ----------------------------------------------------------------------
-Ran 20 tests in 1.210s
+Ran 21 tests in 3.539s
 
 OK
