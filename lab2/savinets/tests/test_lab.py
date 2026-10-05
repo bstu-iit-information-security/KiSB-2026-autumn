@@ -6,9 +6,9 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-from lab.core import (Code, Random, bits_from_text, bits_text, hamming, iterative,
+from lab2 import (Code, Random, bits_from_text, bits_text, hamming, iterative,
                       inject, MAX_K, SHAPES)
-from lab.experiments import experiment_rows
+from lab2 import experiment_rows
 
 ROOT = Path(__file__).resolve().parents[1]
 

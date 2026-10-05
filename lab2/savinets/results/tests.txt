@@ -12,6 +12,6 @@ test_rectangle_and_ambiguity (test_lab.CodeTests.test_rectangle_and_ambiguity) .
 test_validation (test_lab.CodeTests.test_validation) ... ok
 
 ----------------------------------------------------------------------
-Ran 12 tests in 2.579s
+Ran 12 tests in 2.715s
 
 OK
