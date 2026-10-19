@@ -1,0 +1,5 @@
+index,candidate,status,divisor,r,polynomial_checks,candidate_ms,elapsed_ms
+1,143,composite,0,11,0,0.015083,0.022458
+2,145,composite,0,5,0,0.005000,0.029167
+3,147,composite,0,3,0,0.003042,0.033375
+4,149,prime,0,71,72,13.988792,14.027167

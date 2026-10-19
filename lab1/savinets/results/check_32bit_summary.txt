@@ -1,0 +1,1 @@
+found=1 capacity_error=0 start=2407784697 prime=2407784719 candidates=12 sieve_rejected=10 aks_rejected=1 aks_calls=2 elapsed_ms=35532.18841600028
