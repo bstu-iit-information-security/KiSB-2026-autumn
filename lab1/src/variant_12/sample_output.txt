@@ -1,0 +1,25 @@
+Laboratory work 1, variant 12
+LFSR seed: 10000; maximum possible period for degree 5: 31
+
+f(x) = x^5 + x^2 + 1            period = 31; primitive
+1024 bit: 0 -> 496, 1 -> 528, chi^2 = 1.000000
+f(x) = x^5 + 1                  period = 5; not primitive
+1024 bit: 0 -> 820, 1 -> 204, chi^2 = 370.562500
+f(x) = x^5 + x^4 + x^2 + 1      period = 15; not primitive
+1024 bit: 0 -> 548, 1 -> 476, chi^2 = 5.062500
+
+Miller-Rabin self-checks
+n = 2: prime
+n = 97: prime
+n = 1000000007: prime
+n = 1: composite
+n = 341: composite
+n = 561: composite
+n = 1105: composite
+n = 341550071728321: composite
+self-check result: PASS
+
+Prime generation (40 bit candidates)
+prime = 1002184885789 (0xE956DFC61D)
+candidates: 3; sieve rejected: 2; Miller-Rabin rejected: 0
+Miller-Rabin bases are deterministic for all unsigned 64-bit inputs.
