@@ -1,0 +1,330 @@
+{
+  "frequency_test": {
+    "50 (=5 полных периодов)": {
+      "freqs": {
+        "0": 0.1,
+        "1": 0.1,
+        "2": 0.1,
+        "3": 0.1,
+        "4": 0.1,
+        "5": 0.1,
+        "6": 0.1,
+        "7": 0.1,
+        "8": 0.1,
+        "9": 0.1
+      },
+      "chi2": 0.0,
+      "df": 9,
+      "critical_95": 16.919,
+      "uniform_hypothesis_accepted": true
+    },
+    "137 (5.7 периода)": {
+      "freqs": {
+        "0": 0.0948905109489051,
+        "1": 0.10218978102189781,
+        "2": 0.10218978102189781,
+        "3": 0.10218978102189781,
+        "4": 0.0948905109489051,
+        "5": 0.10218978102189781,
+        "6": 0.10218978102189781,
+        "7": 0.0948905109489051,
+        "8": 0.10218978102189781,
+        "9": 0.10218978102189781
+      },
+      "chi2": 0.15328467153284672,
+      "df": 9,
+      "critical_95": 16.919,
+      "uniform_hypothesis_accepted": true
+    }
+  },
+  "period_comparison": {
+    "a=1, c=3 (условие выполнено)": {
+      "period": 10,
+      "pre_period": 0,
+      "condition_met": true
+    },
+    "a=3, c=1 (b=2 не кратно 5)": {
+      "period": 4,
+      "pre_period": 0,
+      "condition_met": false
+    },
+    "a=1, c=2 (НОД(c,N)=2 != 1)": {
+      "period": 5,
+      "pre_period": 0,
+      "condition_met": false
+    },
+    "a=7, c=3 (b=6 не кратно 5)": {
+      "period": 4,
+      "pre_period": 0,
+      "condition_met": false
+    }
+  },
+  "prime_generation": {
+    "summary": {
+      "32": {
+        "avg_attempts": 10.75,
+        "avg_sieved_out": 8.625,
+        "avg_time_ms": 0.08592325001188783
+      },
+      "64": {
+        "avg_attempts": 26.75,
+        "avg_sieved_out": 23.0,
+        "avg_time_ms": 0.21369949999439086
+      },
+      "96": {
+        "avg_attempts": 44.75,
+        "avg_sieved_out": 37.5,
+        "avg_time_ms": 0.46421637497928714
+      },
+      "128": {
+        "avg_attempts": 24.625,
+        "avg_sieved_out": 21.125,
+        "avg_time_ms": 0.39835012499622735
+      }
+    },
+    "log": [
+      {
+        "n": 3322233487,
+        "bits": 32,
+        "attempts": 5,
+        "sieved_out": 4,
+        "elapsed_sec": 8.653899999444548e-05
+      },
+      {
+        "n": 4134165097,
+        "bits": 32,
+        "attempts": 1,
+        "sieved_out": 0,
+        "elapsed_sec": 5.6711000070208684e-05
+      },
+      {
+        "n": 2684969071,
+        "bits": 32,
+        "attempts": 3,
+        "sieved_out": 1,
+        "elapsed_sec": 7.25869999769202e-05
+      },
+      {
+        "n": 3489870187,
+        "bits": 32,
+        "attempts": 14,
+        "sieved_out": 9,
+        "elapsed_sec": 0.00013638500001889042
+      },
+      {
+        "n": 2511292631,
+        "bits": 32,
+        "attempts": 1,
+        "sieved_out": 0,
+        "elapsed_sec": 5.108899995320826e-05
+      },
+      {
+        "n": 2497839737,
+        "bits": 32,
+        "attempts": 8,
+        "sieved_out": 7,
+        "elapsed_sec": 5.8603000070434064e-05
+      },
+      {
+        "n": 2172330977,
+        "bits": 32,
+        "attempts": 28,
+        "sieved_out": 24,
+        "elapsed_sec": 0.00013823800009049592
+      },
+      {
+        "n": 2350185679,
+        "bits": 32,
+        "attempts": 26,
+        "sieved_out": 24,
+        "elapsed_sec": 8.723399992049963e-05
+      },
+      {
+        "n": 18401742420732767113,
+        "bits": 64,
+        "attempts": 1,
+        "sieved_out": 0,
+        "elapsed_sec": 0.00012900199999421602
+      },
+      {
+        "n": 15166909338898053059,
+        "bits": 64,
+        "attempts": 51,
+        "sieved_out": 45,
+        "elapsed_sec": 0.0003239269999539829
+      },
+      {
+        "n": 12260737436038211209,
+        "bits": 64,
+        "attempts": 24,
+        "sieved_out": 22,
+        "elapsed_sec": 0.00014948699993055925
+      },
+      {
+        "n": 16017586886302944473,
+        "bits": 64,
+        "attempts": 27,
+        "sieved_out": 20,
+        "elapsed_sec": 0.00028915300003973243
+      },
+      {
+        "n": 11975328009848833073,
+        "bits": 64,
+        "attempts": 26,
+        "sieved_out": 22,
+        "elapsed_sec": 0.00022095099996022327
+      },
+      {
+        "n": 13464028737317474003,
+        "bits": 64,
+        "attempts": 15,
+        "sieved_out": 13,
+        "elapsed_sec": 0.00015078000001267355
+      },
+      {
+        "n": 11926652683290036799,
+        "bits": 64,
+        "attempts": 34,
+        "sieved_out": 31,
+        "elapsed_sec": 0.00019998599998416466
+      },
+      {
+        "n": 14195471983499090161,
+        "bits": 64,
+        "attempts": 36,
+        "sieved_out": 31,
+        "elapsed_sec": 0.0002463100000795748
+      },
+      {
+        "n": 67334772459302326248064735529,
+        "bits": 96,
+        "attempts": 111,
+        "sieved_out": 98,
+        "elapsed_sec": 0.0008047579999583832
+      },
+      {
+        "n": 59972691807943756299763049609,
+        "bits": 96,
+        "attempts": 19,
+        "sieved_out": 14,
+        "elapsed_sec": 0.0003383310000799611
+      },
+      {
+        "n": 39870876225218717285886667867,
+        "bits": 96,
+        "attempts": 13,
+        "sieved_out": 10,
+        "elapsed_sec": 0.00026800099999491067
+      },
+      {
+        "n": 53188421132122500275852162669,
+        "bits": 96,
+        "attempts": 33,
+        "sieved_out": 27,
+        "elapsed_sec": 0.0004146289999198416
+      },
+      {
+        "n": 45953160609077804534454216143,
+        "bits": 96,
+        "attempts": 18,
+        "sieved_out": 14,
+        "elapsed_sec": 0.0002932729998974537
+      },
+      {
+        "n": 56551956778084646804055001517,
+        "bits": 96,
+        "attempts": 54,
+        "sieved_out": 44,
+        "elapsed_sec": 0.0005955479999784075
+      },
+      {
+        "n": 66188843531002670023449553417,
+        "bits": 96,
+        "attempts": 77,
+        "sieved_out": 69,
+        "elapsed_sec": 0.00047302999996645667
+      },
+      {
+        "n": 64870971140683346557985064293,
+        "bits": 96,
+        "attempts": 33,
+        "sieved_out": 24,
+        "elapsed_sec": 0.0005261610000388828
+      },
+      {
+        "n": 255262491496932926240396306741840110429,
+        "bits": 128,
+        "attempts": 19,
+        "sieved_out": 17,
+        "elapsed_sec": 0.0003180999999585765
+      },
+      {
+        "n": 179191618978837224285131028657492073939,
+        "bits": 128,
+        "attempts": 62,
+        "sieved_out": 53,
+        "elapsed_sec": 0.0008122970000385976
+      },
+      {
+        "n": 284910772379906274498920410023681318383,
+        "bits": 128,
+        "attempts": 1,
+        "sieved_out": 0,
+        "elapsed_sec": 0.00022410199994737923
+      },
+      {
+        "n": 303273034839925258263876384307280345587,
+        "bits": 128,
+        "attempts": 18,
+        "sieved_out": 14,
+        "elapsed_sec": 0.0004217679999101165
+      },
+      {
+        "n": 303959982570498639628078674070035246173,
+        "bits": 128,
+        "attempts": 28,
+        "sieved_out": 24,
+        "elapsed_sec": 0.0003996720000714049
+      },
+      {
+        "n": 281299237677265781840181265071800420149,
+        "bits": 128,
+        "attempts": 8,
+        "sieved_out": 7,
+        "elapsed_sec": 0.00022157900002639508
+      },
+      {
+        "n": 228253222684261744924825570484486262997,
+        "bits": 128,
+        "attempts": 29,
+        "sieved_out": 25,
+        "elapsed_sec": 0.0004462389999844163
+      },
+      {
+        "n": 268709383189357700134964952562313026619,
+        "bits": 128,
+        "attempts": 32,
+        "sieved_out": 29,
+        "elapsed_sec": 0.00034304400003293267
+      }
+    ]
+  },
+  "naive_vs_practical": {
+    "8": {
+      "naive_succeeded": false,
+      "seeded_succeeded": true
+    },
+    "12": {
+      "naive_succeeded": true,
+      "seeded_succeeded": true
+    },
+    "16": {
+      "naive_succeeded": true,
+      "seeded_succeeded": true
+    },
+    "20": {
+      "naive_succeeded": false,
+      "seeded_succeeded": true
+    }
+  }
+}
