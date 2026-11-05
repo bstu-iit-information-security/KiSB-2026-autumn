@@ -1,0 +1,14 @@
+{
+  "kind": "recursive",
+  "n": 18111118989447328183,
+  "a": 2,
+  "child": {
+    "kind": "recursive",
+    "n": 8147987,
+    "a": 2,
+    "child": {
+      "kind": "trial",
+      "n": 337
+    }
+  }
+}
