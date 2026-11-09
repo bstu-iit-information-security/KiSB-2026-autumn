@@ -15,8 +15,8 @@ ECB groups: 0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1 | distinct 2/16
 OFB groups: 0 1 2 3 4 5 6 7 8 9 A B C D E F | distinct 16/16
 
 OFB benchmark, 4096 bytes, median of 7 trials, us
-  Ordinary: 6646.100
-  Prepare: 6939.500
-  Online XOR: 1.900
-  Prepare + XOR: 6941.100
+  Ordinary: 6632.700
+  Prepare: 6400.300
+  Online XOR: 0.600
+  Prepare + XOR: 6401.500
   Ciphertexts identical in every trial: OK

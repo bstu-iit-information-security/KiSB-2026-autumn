@@ -16,17 +16,17 @@ struct Result {
 Result pkcs7_pad(const Byte* input, std::size_t size,
                  Byte* output, std::size_t capacity) noexcept;
 Result pkcs7_unpad(const Byte* input, std::size_t size) noexcept;
-Result ecb_encrypt(const Belt& cipher, const Byte* input, std::size_t size,
+Result ecb_encrypt(const Key& key, const Byte* input, std::size_t size,
                    Byte* output, std::size_t capacity) noexcept;
-Result ecb_decrypt(const Belt& cipher, const Byte* input, std::size_t size,
+Result ecb_decrypt(const Key& key, const Byte* input, std::size_t size,
                    Byte* output, std::size_t capacity) noexcept;
 
 class OfbStream {
 public:
     static constexpr std::size_t cache_capacity = 4096;
 
-    // The cipher must outlive this stream. Each new message needs a unique IV per key.
-    OfbStream(const Belt& cipher, const Block& iv) noexcept;
+    // Each new message needs a unique IV per key.
+    OfbStream(const Key& key, const Block& iv) noexcept;
     OfbStream(const OfbStream&) = delete;
     OfbStream& operator=(const OfbStream&) = delete;
 
@@ -36,9 +36,14 @@ public:
     bool apply(const Byte* input, Byte* output, std::size_t count) noexcept;
 
 private:
-    void generate(const Byte* input, Byte* output, std::size_t count) noexcept;
+    struct GammaChunk {
+        const Byte* bytes;
+        std::size_t size;
+    };
 
-    const Belt& cipher_;
+    GammaChunk take_gamma(std::size_t count) noexcept;
+
+    const Key key_;
     Block feedback_;
     std::size_t offset_ = Block{}.size();
     std::array<Byte, cache_capacity> cache_;

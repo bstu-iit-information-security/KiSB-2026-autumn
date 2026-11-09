@@ -11,7 +11,7 @@ namespace {
 using namespace lab3;
 
 // Fixed public inputs for this demonstration only.
-constexpr Key key = {
+constexpr Key demo_key = {
     0xe9, 0xde, 0xe7, 0x2c, 0x8f, 0x0c, 0x0f, 0xa6, 0x2d, 0xdb, 0x49, 0xf4, 0x6f, 0x73, 0x96, 0x47,
     0x06, 0x07, 0x53, 0x16, 0xed, 0x24, 0x7a, 0x37, 0x39, 0xcb, 0xa3, 0x83, 0x03, 0xa9, 0x8b, 0xf6
 };
@@ -24,18 +24,18 @@ void print_hex(const Byte* data, std::size_t n) {
     std::putchar('\n');
 }
 
-bool demo_message(const Belt& cipher, const char* text) {
+bool demo_message(const Key& key, const char* text) {
     const auto n = std::strlen(text);
     const auto* input = reinterpret_cast<const Byte*>(text);
     std::array<Byte, 48> ecb{}, ofb{}, decoded{};
-    const auto enc = ecb_encrypt(cipher, input, n, ecb.data(), ecb.size());
+    const auto enc = ecb_encrypt(key, input, n, ecb.data(), ecb.size());
     if (!enc.ok) return false;
-    const auto dec = ecb_decrypt(cipher, ecb.data(), enc.size, decoded.data(), decoded.size());
+    const auto dec = ecb_decrypt(key, ecb.data(), enc.size, decoded.data(), decoded.size());
     const bool ecb_ok = dec.ok && dec.size == n && std::memcmp(input, decoded.data(), n) == 0;
 
     Block message_iv = iv;
     message_iv.back() ^= static_cast<Byte>(n);
-    OfbStream sender(cipher, message_iv), receiver(cipher, message_iv);
+    OfbStream sender(key, message_iv), receiver(key, message_iv);
     const bool ofb_ok = sender.apply(input, ofb.data(), n)
         && receiver.apply(ofb.data(), decoded.data(), n)
         && std::memcmp(input, decoded.data(), n) == 0;
@@ -63,7 +63,7 @@ std::size_t show_groups(const char* name, const Byte* bytes) {
     return unique;
 }
 
-bool demo_pattern(const Belt& cipher) {
+bool demo_pattern(const Key& key) {
     constexpr std::size_t block_size = Block{}.size();
     constexpr char layout[] = "AAAABBBBAAAABBBB";
     std::array<Byte, 16 * block_size> input{}, ofb{};
@@ -73,8 +73,8 @@ bool demo_pattern(const Belt& cipher) {
     }
     Block pattern_iv = iv;
     pattern_iv.back() ^= 0x80;
-    OfbStream stream(cipher, pattern_iv);
-    if (!ecb_encrypt(cipher, input.data(), input.size(), ecb.data(), ecb.size()).ok
+    OfbStream stream(key, pattern_iv);
+    if (!ecb_encrypt(key, input.data(), input.size(), ecb.data(), ecb.size()).ok
         || !stream.apply(input.data(), ofb.data(), ofb.size())) return false;
     std::puts("\nBlock equality groups (first 16 blocks, excluding ECB padding):");
     const auto plain_count = show_groups("Plain", input.data());
@@ -88,7 +88,7 @@ double microseconds(Clock::duration duration) {
     return std::chrono::duration<double, std::micro>(duration).count();
 }
 
-bool benchmark(const Belt& cipher) {
+bool benchmark(const Key& key) {
     constexpr std::size_t length = OfbStream::cache_capacity;
     constexpr std::size_t repeats = 7;
     std::array<Byte, length> input{}, regular{}, cached{};
@@ -97,7 +97,7 @@ bool benchmark(const Belt& cipher) {
     for (std::size_t i = 0; i <= repeats; ++i) {
         Block benchmark_iv = iv;
         benchmark_iv.back() ^= static_cast<Byte>(0xa0U + i);
-        OfbStream direct(cipher, benchmark_iv), prepared(cipher, benchmark_iv);
+        OfbStream direct(key, benchmark_iv), prepared(key, benchmark_iv);
         const auto a = Clock::now();
         const bool direct_ok = direct.apply(input.data(), regular.data(), length);
         const auto b = Clock::now();
@@ -125,12 +125,11 @@ bool benchmark(const Belt& cipher) {
 }
 
 int main() {
-    const Belt cipher(key);
     std::puts("Lab 3 | Variant 12 | BelT, ECB + OFB");
-    const bool ok = demo_message(cipher, "BelT demo!")
-        && demo_message(cipher, "Sixteen-byte msg")
-        && demo_message(cipher, "This message is longer than one block.")
-        && demo_pattern(cipher)
-        && benchmark(cipher);
+    const bool ok = demo_message(demo_key, "BelT demo!")
+        && demo_message(demo_key, "Sixteen-byte msg")
+        && demo_message(demo_key, "This message is longer than one block.")
+        && demo_pattern(demo_key)
+        && benchmark(demo_key);
     return ok ? EXIT_SUCCESS : EXIT_FAILURE;
 }

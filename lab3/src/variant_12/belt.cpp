@@ -76,19 +76,24 @@ void round(Word& a, Word& b, Word& c, Word& d, const Word* k, Word i) noexcept {
     b ^= g<21>(a + k[5 * Step]);
     c ^= g<5>(d + k[6 * Step]);
 }
-}
-
-Belt::Belt(const Key& key) noexcept {
-    for (std::size_t i = 0; i < round_keys_.size(); ++i) {
-        round_keys_[i] = load_le(key.data() + 4 * (i % 8));
+std::array<Word, 56> expand_key(const Key& key) noexcept {
+    std::array<Word, 56> round_keys;
+    for (std::size_t i = 0; i < 8; ++i) {
+        round_keys[i] = load_le(key.data() + 4 * i);
     }
+    for (std::size_t i = 8; i < round_keys.size(); ++i) {
+        round_keys[i] = round_keys[i % 8];
+    }
+    return round_keys;
+}
 }
 
-Block Belt::encrypt_block(const Block& input) const noexcept {
+Block encrypt_block(const Block& input, const Key& key) noexcept {
+    const auto round_keys = expand_key(key);
     const Byte* p = input.data();
     Word a = load_le(p), b = load_le(p + 4), c = load_le(p + 8), d = load_le(p + 12);
     for (Word i = 1; i <= 8; ++i) {
-        round<1>(a, b, c, d, round_keys_.data() + 7 * (i - 1), i);
+        round<1>(a, b, c, d, round_keys.data() + 7 * (i - 1), i);
         std::swap(a, b);
         std::swap(c, d);
         std::swap(b, c);
@@ -96,11 +101,12 @@ Block Belt::encrypt_block(const Block& input) const noexcept {
     return pack(b, d, a, c);
 }
 
-Block Belt::decrypt_block(const Block& input) const noexcept {
+Block decrypt_block(const Block& input, const Key& key) noexcept {
+    const auto round_keys = expand_key(key);
     const Byte* p = input.data();
     Word a = load_le(p), b = load_le(p + 4), c = load_le(p + 8), d = load_le(p + 12);
     for (Word i = 8; i > 0; --i) {
-        round<-1>(a, b, c, d, round_keys_.data() + 7 * i - 1, i);
+        round<-1>(a, b, c, d, round_keys.data() + 7 * i - 1, i);
         std::swap(a, b);
         std::swap(c, d);
         std::swap(a, d);

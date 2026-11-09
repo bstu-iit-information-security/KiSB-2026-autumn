@@ -8,12 +8,6 @@ using Byte = std::uint8_t;
 using Block = std::array<Byte, 16>;
 using Key = std::array<Byte, 32>;
 
-class Belt {
-public:
-    explicit Belt(const Key& key) noexcept;
-    Block encrypt_block(const Block& input) const noexcept;
-    Block decrypt_block(const Block& input) const noexcept;
-private:
-    std::array<std::uint32_t, 56> round_keys_{};
-};
+Block encrypt_block(const Block& input, const Key& key) noexcept;
+Block decrypt_block(const Block& input, const Key& key) noexcept;
 }
