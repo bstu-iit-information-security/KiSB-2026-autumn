@@ -1,0 +1,11 @@
+build/
+.vs/
+x64/
+Debug/
+Release/
+*.user
+*.obj
+*.exe
+*.pdb
+*.ilk
+lab2_output.txt
