@@ -1,0 +1,22 @@
+Lab 3 | Variant 12 | BelT, ECB + OFB
+Message 10 bytes: BelT demo!
+  ECB 16 bytes, pad 6, restore OK: 1b6c5c1cedeb863f49d420cd1f75174a
+  OFB 10 bytes, restore OK: 8db6bdb9ebaf9fbe3578
+Message 16 bytes: Sixteen-byte msg
+  ECB 32 bytes, pad 16, restore OK: bfdd9bfbef9c4fb47f6f4ef07c4573ac7dcc63b17fcc6b05c450a88e3385a417
+  OFB 16 bytes, restore OK: f9b8c13a22b9765c7fc75bcac0dfc482
+Message 38 bytes: This message is longer than one block.
+  ECB 48 bytes, pad 10, restore OK: 3e2211118fd32dcec67c98d2d890528b7e67e022ba7bb9817afb42e2497ce2d90326537ee85b891a4da0ac9596f4b727
+  OFB 38 bytes, restore OK: a6089fd62c5c8d58210bd11f717bde82fc6e577cd9108e87c18830ffacec1fe258563fbe017f
+
+Block equality groups (first 16 blocks, excluding ECB padding):
+Plain groups: 0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1 | distinct 2/16
+ECB groups: 0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1 | distinct 2/16
+OFB groups: 0 1 2 3 4 5 6 7 8 9 A B C D E F | distinct 16/16
+
+OFB benchmark, 4096 bytes, median of 7 trials, us
+  Ordinary: 6646.100
+  Prepare: 6939.500
+  Online XOR: 1.900
+  Prepare + XOR: 6941.100
+  Ciphertexts identical in every trial: OK
