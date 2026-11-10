@@ -94,3 +94,31 @@ def mix_columns(state, inverse):
             state[4 * col + 1] = a ^ mul(b, 2) ^ mul(c, 3) ^ d
             state[4 * col + 2] = a ^ b ^ mul(c, 2) ^ mul(d, 3)
             state[4 * col + 3] = mul(a, 3) ^ b ^ c ^ mul(d, 2)
+
+
+def encrypt_block(block, round_keys):
+    state = list(block)
+    add_round_key(state, round_keys[0])
+    for round_number in range(1, 10):
+        sub_bytes(state, False)
+        shift_rows(state, False)
+        mix_columns(state, False)
+        add_round_key(state, round_keys[round_number])
+    sub_bytes(state, False)
+    shift_rows(state, False)
+    add_round_key(state, round_keys[10])
+    return bytes(state)
+
+
+def decrypt_block(block, round_keys):
+    state = list(block)
+    add_round_key(state, round_keys[10])
+    for round_number in range(9, 0, -1):
+        shift_rows(state, True)
+        sub_bytes(state, True)
+        add_round_key(state, round_keys[round_number])
+        mix_columns(state, True)
+    shift_rows(state, True)
+    sub_bytes(state, True)
+    add_round_key(state, round_keys[0])
+    return bytes(state)
