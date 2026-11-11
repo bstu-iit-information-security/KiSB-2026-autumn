@@ -96,6 +96,39 @@ def mix_columns(state, inverse):
             state[4 * col + 3] = mul(a, 3) ^ b ^ c ^ mul(d, 2)
 
 
+def pad(data):
+    size = 16 - len(data) % 16
+    return data + bytes([size]) * size
+
+
+def unpad(data):
+    size = data[-1]
+    if size < 1 or size > 16:
+        raise ValueError("invalid padding")
+    if data[-size:] != bytes([size]) * size:
+        raise ValueError("invalid padding")
+    return data[:-size]
+
+
+def xor_bytes(left, right):
+    return bytes(a ^ b for a, b in zip(left, right))
+
+
+def ecb_encrypt(data, encrypt_block, round_keys):
+    padded = pad(data)
+    result = b""
+    for i in range(0, len(padded), 16):
+        result += encrypt_block(padded[i:i + 16], round_keys)
+    return result
+
+
+def ecb_decrypt(data, decrypt_block, round_keys):
+    padded = b""
+    for i in range(0, len(data), 16):
+        padded += decrypt_block(data[i:i + 16], round_keys)
+    return unpad(padded)
+
+
 def encrypt_block(block, round_keys):
     state = list(block)
     add_round_key(state, round_keys[0])
