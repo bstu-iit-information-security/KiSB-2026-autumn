@@ -129,6 +129,28 @@ def ecb_decrypt(data, decrypt_block, round_keys):
     return unpad(padded)
 
 
+def cbc_encrypt(data, encrypt_block, round_keys, iv):
+    padded = pad(data)
+    result = b""
+    previous = iv
+    for i in range(0, len(padded), 16):
+        block = xor_bytes(padded[i:i + 16], previous)
+        previous = encrypt_block(block, round_keys)
+        result += previous
+    return result
+
+
+def cbc_decrypt(data, decrypt_block, round_keys, iv):
+    result = b""
+    previous = iv
+    for i in range(0, len(data), 16):
+        block = data[i:i + 16]
+        plain = xor_bytes(decrypt_block(block, round_keys), previous)
+        result += plain
+        previous = block
+    return unpad(result)
+
+
 def encrypt_block(block, round_keys):
     state = list(block)
     add_round_key(state, round_keys[0])
@@ -155,3 +177,17 @@ def decrypt_block(block, round_keys):
     sub_bytes(state, True)
     add_round_key(state, round_keys[0])
     return bytes(state)
+
+
+if __name__ == "__main__":
+    key = bytes.fromhex("000102030405060708090a0b0c0d0e0f")
+    iv = bytes(16)
+    round_keys = expand_key(key)
+    block = bytes.fromhex("00112233445566778899aabbccddeeff")
+    cipher = encrypt_block(block, round_keys)
+    print(cipher == bytes.fromhex("69c4e0d86a7b0430d8cdb78070b4c55a"))
+    for message in (b"a", b"0123456789abcdef", b"0123456789abcdef0123456789abcdef"):
+        cipher = cbc_encrypt(message, encrypt_block, round_keys, iv)
+        print(cbc_decrypt(cipher, decrypt_block, round_keys, iv) == message)
+        cipher = ecb_encrypt(message, encrypt_block, round_keys)
+        print(ecb_decrypt(cipher, decrypt_block, round_keys) == message)
