@@ -1,0 +1,26 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+x64/
+x86/
+Debug/
+Release/
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.ipch
+*.tlog
+*.log
+*.exe
+# program output
+hamming_output.txt
+# CMake
+build/
+out/
+CMakeCache.txt
+CMakeFiles/
+# Office temp files
+~$*
+*.tmp
