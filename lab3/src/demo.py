@@ -90,7 +90,7 @@ def demo_iv_and_chain():
     print(f"Неверный IV (1 бит): изменились байты открытого текста {diff} "
           "(только блок P_1, причём ровно тот же бит)")
 
-    t = bytearray(ct); t[16] ^= 0x01       
+    t = bytearray(ct); t[16] ^= 0x01        
     pt_t = cbc_decrypt(bytes(t), KEY, IV, padding=False)
     blocks_bad = sorted({i // 16 + 1 for i in range(len(good_pt)) if good_pt[i] != pt_t[i]})
     print(f"Порча 1 бита в C_2 -> затронуты блоки открытого текста: P_{blocks_bad}")
@@ -138,7 +138,7 @@ def demo_image(path=None):
     path = path or find_image()
     with open(path, "rb") as f:
         data = f.read()
-    header, pixels = split_bmp(data)        
+    header, pixels = split_bmp(data)         
     print(f"Файл {path}: заголовок {len(header)} байт, пиксельных данных {len(pixels)} байт")
 
     ecb_ct = ecb_encrypt(pixels, KEY)
@@ -163,8 +163,15 @@ def demo_image(path=None):
 
 
 if __name__ == "__main__":
-    demo_block()
-    demo_strings()
-    demo_padding()
-    demo_iv_and_chain()
-    demo_image(sys.argv[1] if len(sys.argv) > 1 else None)
+    args = sys.argv[1:]
+    blocks = {"1": demo_block, "2": demo_strings, "3": demo_padding, "4": demo_iv_and_chain}
+    if args and args[0] in blocks:
+        blocks[args[0]]()
+    elif args and args[0] == "5":
+        demo_image(args[1] if len(args) > 1 else None)
+    else:
+        demo_block()
+        demo_strings()
+        demo_padding()
+        demo_iv_and_chain()
+        demo_image(args[0] if args else None)
