@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "Lab2Variant12", "Lab2Variant12.vcxproj", "{34115753-03C5-5C71-815A-1E5CED2C5C27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34115753-03C5-5C71-815A-1E5CED2C5C27}.Debug|x64.ActiveCfg = Debug|x64
+		{34115753-03C5-5C71-815A-1E5CED2C5C27}.Debug|x64.Build.0 = Debug|x64
+		{34115753-03C5-5C71-815A-1E5CED2C5C27}.Release|x64.ActiveCfg = Release|x64
+		{34115753-03C5-5C71-815A-1E5CED2C5C27}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
