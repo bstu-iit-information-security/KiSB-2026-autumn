@@ -1,0 +1,28 @@
+test_fips_197_decryption (test_aes128.AES128Tests) ... ok
+test_fips_197_encryption (test_aes128.AES128Tests) ... ok
+test_fips_field_multiplication (test_aes128.AES128Tests) ... ok
+test_fips_first_round_intermediate_states (test_aes128.AES128Tests) ... ok
+test_fips_key_expansion (test_aes128.AES128Tests) ... ok
+test_nist_sp800_38a_vector_both_directions (test_aes128.AES128Tests) ... ok
+test_non_bytes_are_rejected (test_aes128.AES128Tests) ... ok
+test_wrong_lengths_are_rejected (test_aes128.AES128Tests) ... ok
+test_default_demonstration (test_cli.CommandLineTests) ... ok
+test_hex_round_trip_for_both_modes (test_cli.CommandLineTests) ... ok
+test_rejects_bad_hex_and_missing_iv (test_cli.CommandLineTests) ... ok
+test_cfb_decryption_never_uses_aes_decrypt_block (test_modes.ModeTests) ... ok
+test_ecb_rejects_invalid_ciphertext_length (test_modes.ModeTests) ... ok
+test_ecb_rejects_invalid_decrypted_padding (test_modes.ModeTests) ... ok
+test_invalid_ivs_are_rejected_even_for_empty_input (test_modes.ModeTests) ... ok
+test_invalid_keys_are_rejected_even_for_empty_input (test_modes.ModeTests) ... ok
+test_key_and_iv_must_be_bytes_even_for_empty_input (test_modes.ModeTests) ... ok
+test_nist_cfb128_vectors_including_partial_blocks (test_modes.ModeTests) ... ok
+test_nist_ecb_vectors_and_full_block_padding (test_modes.ModeTests) ... ok
+test_roundtrip_boundaries_and_large_input (test_modes.ModeTests) ... ok
+test_empty_input_gets_a_full_padding_block (test_modes.PaddingTests) ... ok
+test_padding_roundtrip_at_block_boundaries (test_modes.PaddingTests) ... ok
+test_rejects_invalid_padding (test_modes.PaddingTests) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.919s
+
+OK
