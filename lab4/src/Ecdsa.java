@@ -1,8 +1,8 @@
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
-import java.util.Scanner;
+
 
 public final class Ecdsa {
     private static final SecureRandom RANDOM = new SecureRandom();
@@ -19,23 +19,22 @@ public final class Ecdsa {
     private Ecdsa() { }
 
     public static void main(String[] args) throws Exception {
-        System.out.print("Введите сообщение обычным текстом: ");
-        String messageText;
+        System.out.print("Введите сообщение в Hex (например, 48656c6c6f): ");
+        String messageHex;
         try (Scanner scanner = new Scanner(System.in)) {
             if (!scanner.hasNextLine()) {
-                throw new IllegalArgumentException("No message was entered");
+                throw new IllegalArgumentException("Сообщение не введено");
             }
-            messageText = scanner.nextLine();
+            messageHex = scanner.nextLine().trim();
         }
 
-        byte[] message = messageText.getBytes(StandardCharsets.UTF_8);
+        byte[] message = decodeHex(messageHex);
         byte[] digest = MessageDigest.getInstance("SHA-256").digest(message);
         String digestHex = toHex(digest);
         BigInteger e = new BigInteger(1, digest).mod(CURVE.q);
 
         System.out.println("Curve: secp256k1");
-        System.out.println("Message: " + messageText);
-        System.out.println("Message (UTF-8 hex): " + toHex(message));
+        System.out.println("Message (Hex): " + messageHex);
         System.out.println("SHA-256 (hex): " + digestHex);
 
         BigInteger alicePrivate = randomScalar(CURVE.q);
@@ -226,6 +225,25 @@ public final class Ecdsa {
 
     private static BigInteger hex(String value) {
         return new BigInteger(value, 16);
+    }
+
+    private static byte[] decodeHex(String value) {
+        if ((value.length() & 1) != 0) {
+            throw new IllegalArgumentException("Длина Hex-строки должна быть чётной");
+        }
+
+        byte[] result = new byte[value.length() / 2];
+        for (int i = 0; i < result.length; i++) {
+            int high = Character.digit(value.charAt(i * 2), 16);
+            int low = Character.digit(value.charAt(i * 2 + 1), 16);
+
+            if (high < 0 || low < 0) {
+                throw new IllegalArgumentException("Используйте только символы Hex: 0-9, A-F");
+            }
+
+            result[i] = (byte) ((high << 4) | low);
+        }
+        return result;
     }
 
     private static String toHex(byte[] value) {
