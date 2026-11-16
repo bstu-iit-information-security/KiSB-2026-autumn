@@ -1,6 +1,8 @@
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.Scanner;
 
 public final class Ecdsa {
     private static final SecureRandom RANDOM = new SecureRandom();
@@ -14,23 +16,26 @@ public final class Ecdsa {
                     hex("483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8")),
             hex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141"));
 
-    private static final String MESSAGE_HEX = "48656c6c6f";
-    private static final String EXPECTED_SHA256_HEX =
-            "185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969";
-
     private Ecdsa() { }
 
     public static void main(String[] args) throws Exception {
-        byte[] message = decodeHex(MESSAGE_HEX);
+        System.out.print("Введите сообщение обычным текстом: ");
+        String messageText;
+        try (Scanner scanner = new Scanner(System.in)) {
+            if (!scanner.hasNextLine()) {
+                throw new IllegalArgumentException("No message was entered");
+            }
+            messageText = scanner.nextLine();
+        }
+
+        byte[] message = messageText.getBytes(StandardCharsets.UTF_8);
         byte[] digest = MessageDigest.getInstance("SHA-256").digest(message);
         String digestHex = toHex(digest);
-        if (!digestHex.equals(EXPECTED_SHA256_HEX)) {
-            throw new IllegalStateException("SHA-256 test vector mismatch");
-        }
         BigInteger e = new BigInteger(1, digest).mod(CURVE.q);
 
         System.out.println("Curve: secp256k1");
-        System.out.println("Message (hex): " + MESSAGE_HEX);
+        System.out.println("Message: " + messageText);
+        System.out.println("Message (UTF-8 hex): " + toHex(message));
         System.out.println("SHA-256 (hex): " + digestHex);
 
         BigInteger alicePrivate = randomScalar(CURVE.q);
@@ -221,18 +226,6 @@ public final class Ecdsa {
 
     private static BigInteger hex(String value) {
         return new BigInteger(value, 16);
-    }
-
-    private static byte[] decodeHex(String value) {
-        if ((value.length() & 1) != 0) throw new IllegalArgumentException("Odd-length Hex string");
-        byte[] result = new byte[value.length() / 2];
-        for (int i = 0; i < result.length; ++i) {
-            int high = Character.digit(value.charAt(i * 2), 16);
-            int low = Character.digit(value.charAt(i * 2 + 1), 16);
-            if (high < 0 || low < 0) throw new IllegalArgumentException("Invalid Hex string");
-            result[i] = (byte) ((high << 4) | low);
-        }
-        return result;
     }
 
     private static String toHex(byte[] value) {
