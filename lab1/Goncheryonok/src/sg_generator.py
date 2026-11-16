@@ -1,4 +1,4 @@
-from .lfsr import LFSR, is_primitive
+from Goncheryonok.lfsr import LFSR, is_primitive
 
 class SGGenerator:
 

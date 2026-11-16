@@ -7,21 +7,24 @@
 import argparse
 import time
 
-from src.lfsr import is_primitive, poly_degree
-from src.sg_generator import SGGenerator
-from src.stats import monobit_test, block_test, chi2_critical, runs_test
+from Goncheryonok.lfsr import is_primitive, poly_degree
+from Goncheryonok.sg_generator import SGGenerator
+from Goncheryonok.stats import monobit_test, block_test, chi2_critical, runs_test
 
 
 POLYNOMIALS = {
-    1: 0b10001111,   # x^7 + x^3 + x^2 + x + 1
-    2: 0b10000011,   # x^7 + x + 1
-    3: 0b10001001,   # x^7 + x^3 + 1
+    1: 0b10001111,
+    2: 0b10000011,
+    3: 0b10001001,
+    4: 0b100101,
+    5: 0b1000010001,
+    6: 0b10000001001,
+    7: 0b1000000000000011,
+    8: 0b11010000000010001,
 }
-
-
 def check_primitive() -> None:
     print("=" * 60)
-    print("Проверка примитивности многочленов (вариант 2)")
+    print("Проверка примитивности многочленов")
     print("=" * 60)
     for idx, poly in POLYNOMIALS.items():
         n = poly_degree(poly)
@@ -57,8 +60,9 @@ def run_sg(g1_idx: int, g2_idx: int, seed1: int, seed2: int,
     print("=" * 60)
 
     p, z = monobit_test(bits)
+    verdict = "OK" if abs(z) < 1.96 else "ОТКЛОНЕНО"
     print(f"Частотный: доля единиц = {p:.6f}, z = {z:.4f} "
-          f"(|z| < 1.96 → H0 не отвергается)")
+          f"(|z| < 1.96) → {verdict}")
 
     r = runs_test(bits)
     print(f"Серийный: runs = {r['runs']}, expected = {r['expected']:.1f}, "
@@ -82,9 +86,9 @@ def main():
     ap = argparse.ArgumentParser(description="ЛР №1, вариант 2 — SG-генератор")
     ap.add_argument("--check-primitive", action="store_true",
                     help="проверить примитивность многочленов варианта")
-    ap.add_argument("--g1", type=int, default=2, choices=[1, 2, 3],
+    ap.add_argument("--g1", type=int, default=2, choices=[1, 2, 3,4,5,6,7,8],
                     help="номер многочлена для G1 (по умолчанию 2)")
-    ap.add_argument("--g2", type=int, default=3, choices=[1, 2, 3],
+    ap.add_argument("--g2", type=int, default=3, choices=[1, 2, 3,4,5,6,7,8],
                     help="номер многочлена для G2 (по умолчанию 3)")
     ap.add_argument("--seed1", type=int, default=1)
     ap.add_argument("--seed2", type=int, default=1)
