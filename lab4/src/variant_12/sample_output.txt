@@ -1,0 +1,57 @@
+Lab 4 | Variant 12 | Yaroma A. I.
+Affine bign-curve256v1 | ECDH | BIGN with belt-hash
+Numbers and coordinates use big-endian hex; byte strings retain byte order.
+p ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff43
+a ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff40
+b 77ce6c1515f3a8edd2c13aabe4d8fbbe4cf55069978b9253b22e7d6bd69c03f1
+q ffffffffffffffffffffffffffffffffd95c8ed60dfb4dfc7e5abf99263d6607
+Gx 0000000000000000000000000000000000000000000000000000000000000000
+Gy 6bf7fc3cfb16d69f5ce4c9a351d6835d78913966c408f6521e29cf1804516a93
+Alice.Qx 8ca2c6e117a5f8818e5cad951944a06a26c19a23eb36726fb2921d306e3ee7d6
+Alice.Qy 071455b4183d2d7e966b16733d2184320c0a048bdc2e8f377798c3e3f0a231a7
+Bob.Qx 26ee8843fed0467dcf16626a11473e4002dd73741103fb877f2a6f5a363ab3f8
+Bob.Qy 7b65cae0c39a058b449b565d9a1d1d217eea93f8af96c271ae8c8893f38333bb
+Alice.SharedX d56a6276450671774c84d93b6dd91958c2b61ad80230eb6fb5f76840bbac3511
+Bob.SharedX d56a6276450671774c84d93b6dd91958c2b61ad80230eb6fb5f76840bbac3511
+ECDH shared secrets MATCH
+
+Message length 13 bytes
+M b194bac80a08f53b366d008e58
+H abef9725d4c5a83597a367d14494cc2542f20f659ddfecc961a3ec550cba8c75
+S0 da426f576a07256f9c454601baae81b7
+S1 8a82836727164911a18fc3f660b4638199eafd82537437ca87bcdf5ab05eb1d2
+BIGN signature verification OK
+Changed one byte of S1 REJECTED
+Published belt-hash vector OK
+
+Message length 32 bytes
+M b194bac80a08f53b366d008e584a5de48504fa9d1bb6c7ac252e72c202fdce0d
+H 749e4c3653aece5e48db4761227742eb6dbe13f4a80f7beff1a9cf8d10ee7786
+S0 70b78a2b13cd57eaefc48873c2472a9b
+S1 18ab477c1b9dac731869a9cb1505a798bc0d1ede888f370e6990890da3aa07f5
+BIGN signature verification OK
+Changed one byte of S1 REJECTED
+Published belt-hash vector OK
+
+Message length 48 bytes
+M b194bac80a08f53b366d008e584a5de48504fa9d1bb6c7ac252e72c202fdce0d5be3d61217b96181fe6786ad716b890b
+H 9d02ee446fb6a29fe5c982d4b13af9d3e90861bc4cef27cf306bfb0b174a154a
+S0 cee37c47d0b97ae49ecf76ebcc2cba59
+S1 c486140a0053ed6bb2b7af5a0e460cb9181249b8182e217b0721068141da3f53
+BIGN signature verification OK
+Changed one byte of S1 REJECTED
+Published belt-hash vector OK
+
+Fixed-batch nonce selection
+First valid candidate 100 attempts, 800 limb comparisons
+Last valid candidate 100 attempts, 800 limb comparisons
+All candidates invalid REJECTED after 100 attempts
+Scalar 1 256 bits, 256 additions, 256 doublings
+Scalar q-1 256 bits, 256 additions, 256 doublings
+
+Separate coursework equations (GOST-style r,s)
+r 06c1d9a4d016c963579f39ed582c8a8583fc74376714414c90450aa3bf22815b
+s 7fef0a9ababddbf89c233bd7808f1dbf1a242cb795a75de54eb2dfee0ca46060
+Coursework signature OK; changed s REJECTED
+
+All demonstration checks passed.
