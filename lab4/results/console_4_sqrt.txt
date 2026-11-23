@@ -1,0 +1,9 @@
+==============================================================================
+КВАДРАТНЫЙ КОРЕНЬ ПО МОДУЛЮ p (Ed25519, S = 2)
+==============================================================================
+p = 7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed
+p - 1 = Q * 2^S: S = 2, Q = 1ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffb
+невычет z = 2
+a = 6392857ccea90c6a371a87baa0ba1172caa3d40e78a97ead721422823f765d9c
+ constant-time: R = 7ca679d9a0fd017aaa2123b0e417712f028437863f8c02f6838446ffc0e2cda7, корень существует, R^2 = a: да, умножений: 510
+  классический: R = 7ca679d9a0fd017aaa2123b0e417712f028437863f8c02f6838446ffc0e2cda7, корень существует, R^2 = a: да, умножений: 1520
