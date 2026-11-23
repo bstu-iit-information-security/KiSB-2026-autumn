@@ -1,0 +1,36 @@
+import pytest
+from aes import encrypt_block, decrypt_block
+from modes import pad, unpad, ecb_encrypt, ecb_decrypt, cbc_encrypt, cbc_decrypt
+
+H = bytes.fromhex
+KEY = H("2b7e151628aed2a6abf7158809cf4f3c")
+IV = H("000102030405060708090a0b0c0d0e0f")
+PT = H("6bc1bee22e409f96e93d7e117393172a")
+
+
+def test_fips197_block():
+    k, pt = H("000102030405060708090a0b0c0d0e0f"), H("00112233445566778899aabbccddeeff")
+    ct = H("69c4e0d86a7b0430d8cdb78070b4c55a")
+    assert encrypt_block(pt, k) == ct
+    assert decrypt_block(ct, k) == pt
+
+
+def test_sp800_38a_ecb_cbc_first_block():
+    assert ecb_encrypt(PT, KEY)[:16] == H("3ad77bb40d7a3660a89ecaf32466ef97")
+    assert cbc_encrypt(PT, KEY, IV)[:16] == H("7649abac8119b246cee98e9b12e9197d")
+
+
+@pytest.mark.parametrize("n", [0, 1, 15, 16, 17, 31, 32, 100])
+def test_roundtrip_and_padding(n):
+    m = bytes(range(n))
+    assert len(pad(m)) == (n // 16 + 1) * 16        # при n=16 -> +целый блок
+    assert unpad(pad(m)) == m
+    assert ecb_decrypt(ecb_encrypt(m, KEY), KEY) == m
+    assert cbc_decrypt(cbc_encrypt(m, KEY, IV), KEY, IV) == m
+
+
+def test_bad_padding_rejected():
+    with pytest.raises(ValueError):
+        unpad(b"A" * 15 + b"\x00")
+    with pytest.raises(ValueError):
+        unpad(b"A" * 14 + b"\x01\x02")
