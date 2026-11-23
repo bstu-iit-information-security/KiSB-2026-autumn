@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ЛР2: Хемминг d=3, 1 ошибка",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src.main",
+            "args": ["hamming", "--text", "Hi", "--dmin", "3", "--errors", "1"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "ЛР2: Хемминг d=4, 2 ошибки",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src.main",
+            "args": ["hamming", "--text", "Hi", "--dmin", "4", "--errors", "2"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "ЛР2: итеративный, конф. 3, 4 группы, 3 ошибки",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src.main",
+            "args": ["iterative", "--config", "3", "--groups", "4", "--errors", "3"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "ЛР2: эксперимент (итеративные коды)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src.main",
+            "args": ["experiment-iterative"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
